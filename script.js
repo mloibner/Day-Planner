@@ -12,7 +12,7 @@ console.log(realTime);
 //Variables for background of text color and save button and text
 let textBackground = $('.form-control');
 let saveBtn = $('.saveBtn');
-let inputText = [];
+let textInput = $(".textInput")
 
 //To change background color of text input
 function colorChanger() {
@@ -29,22 +29,16 @@ function colorChanger() {
 }
 
 //To save the text to local storage when save clicked and retrieve on refresh. 
-let textText = JSON.parse(localStorage.getItem('inputText'));
-if (!textText) {
-    textText = [];
-}
-
 saveBtn.on("click", function (event) {
     event.preventDefault();
-    inputText.push({
-        value: inputText[this.id].value,
-        id: this.id
-    })
-    localStorage.setItem("timeBlockNotes", JSON.stringify(inputText));
-
-    for (let i = 0; i < inputText.length; i++){
-        let savedInfo = inputText[i].savedInfo;
-    }
+    const current = $(this).attr("data-time");
+    localStorage.setItem(current, $("#" + current).val());
 })
+function render(){
+    for (let index = 9; index <18; index ++){
+        $("#" + index).val(localStorage.getItem(index))
+    }
+}
 
 colorChanger();
+render();
