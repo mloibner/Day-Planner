@@ -86,3 +86,8 @@ body {
   .textInput {
       min-width: 80%;
   }
+
+  .saveBtn {
+      background-color: #06AED5;
+      border-radius: 0.25rem;
+  }
