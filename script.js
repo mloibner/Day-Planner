@@ -29,16 +29,26 @@ function colorChanger() {
 }
 
 //To save the text to local storage when save clicked and retrieve on refresh. 
+
+
+//This is not working at all
+function render() {
+    for (let i = 0; i < 9; i++){
+        $("#" + i).val(JSON.parse(localStorage.getItem(i)))
+    }}
+
+//This code is working and has been tested in the console
 saveBtn.on("click", function (event) {
+    console.log('click')
+
     event.preventDefault();
     const current = $(this).attr("data-time");
+    console.log(current)
+
     localStorage.setItem(current, $("#" + current).val());
 })
-function render(){
-    for (let index = 9; index <18; index ++){
-        $("#" + index).val(localStorage.getItem(index))
-    }
-}
 
-colorChanger();
+
 render();
+colorChanger();
+
