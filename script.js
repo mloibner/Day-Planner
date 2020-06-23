@@ -44,7 +44,7 @@ saveBtn.on("click", function (event) {
 
     localStorage.setItem(current, $("#" + current).val());
 })
-
+//This code is also tested and working
 $('.textInput').each(function(){
 
     const viewInput = $(this).attr('id');
@@ -52,15 +52,5 @@ $('.textInput').each(function(){
     
     $(this).val(partTwo)
 })
-
-
-
-//This is not working at all and I can't figure why
-// function render() {
-//     for (let i = 0; i < 9; i++){
-//         $("#" + [i]).val(JSON.parse(localStorage.getItem([i])))
-//     }}
-
-// render();
 
 
