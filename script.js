@@ -6,7 +6,7 @@ console.log(todaysDate)
 //Variables for time created
 let hourTime = $(".input-group-text");
 console.log(hourTime);
-let realTime = moment().format("hA");
+let realTime = moment().hours();
 console.log(realTime);
 
 //Variables for background of text color and save button and text
@@ -15,27 +15,24 @@ let saveBtn = $('.saveBtn');
 let textInput = $(".textInput")
 
 //To change background color of text input
-function colorChanger() {
-    for (let i = 0; i < hourTime.length; i++) {
-        let timeMatch = parseInt($(hourTime[i]).text());
-        if (realTime === timeMatch) {
-            $(textBackground[i]).addClass("present");
-        } else if (realTime > timeMatch) {
-            $(textBackground[i]).addClass("past");
-        } else {
-            $(textBackground[i]).addClass("future");
-        }
+
+$('.textInput').each(function(){
+    let dataAttVal = +$(this).attr('data-time')
+         
+    if (realTime === dataAttVal) {
+        console.log(realTime);
+        console.log(dataAttVal);
+        $(this).addClass("present");
     }
-}
+    if (realTime < dataAttVal){
+        $(this).addClass("future");
+    }
+    if (realTime > dataAttVal){
+        $(this).addClass("past")
+    }
+})
 
 //To save the text to local storage when save clicked and retrieve on refresh. 
-
-
-//This is not working at all
-function render() {
-    for (let i = 0; i < 9; i++){
-        $("#" + i).val(JSON.parse(localStorage.getItem(i)))
-    }}
 
 //This code is working and has been tested in the console
 saveBtn.on("click", function (event) {
@@ -48,7 +45,22 @@ saveBtn.on("click", function (event) {
     localStorage.setItem(current, $("#" + current).val());
 })
 
+$('.textInput').each(function(){
 
-render();
-colorChanger();
+    const viewInput = $(this).attr('id');
+    const partTwo = localStorage.getItem(viewInput);
+    
+    $(this).val(partTwo)
+})
+
+
+
+//This is not working at all and I can't figure why
+// function render() {
+//     for (let i = 0; i < 9; i++){
+//         $("#" + [i]).val(JSON.parse(localStorage.getItem([i])))
+//     }}
+
+// render();
+
 
